@@ -2,6 +2,7 @@ package com.Expensemanager.springboot.Expensetracker.model;
 
 import java.sql.Date;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -12,24 +13,31 @@ public class Transaction {
 	@Id
 	private int transactionid;
 	private Date date;
-	@OneToOne(mappedBy = "transaction")
-	private Category category;
 	@OneToOne
+	@JoinColumn(name = "category_id")
+	private Category category;
+	private long Amount;
+	private String description;
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "income_id")
 	private Income income;
-	
+//	private long cash;
+//	private long liquidCash;
 
-	public Transaction(int transactionid, Date date, Category category, Income income, long amount,
-			String description) {
+	public Transaction(int transactionid, Date date, Category category, long amount, String description, Income income,
+			long cash, long liquidCash) {
 		super();
 		this.transactionid = transactionid;
 		this.date = date;
 		this.category = category;
-		this.income = income;
 		Amount = amount;
 		this.description = description;
-	}
+		this.income = income;
+//		this.cash = cash;
+//		this.liquidCash = liquidCash;
+	}	
 
+	
 	public Transaction() {
 		super();
 	}
@@ -53,16 +61,31 @@ public class Transaction {
 		this.income = income;
 	}
 
-	private long Amount;
-	private String description;
+	
 
-	public int getTransaction_id() {
+	public int getTransactionid() {
 		return transactionid;
 	}
 
-	public void setTransaction_id(int transaction_id) {
-		this.transactionid = transaction_id;
+	public void setTransactionid(int transactionid) {
+		this.transactionid = transactionid;
 	}
+
+//	public long getCash() {
+//		return cash;
+//	}
+//
+//	public void setCash(long cash) {
+//		this.cash = cash;
+//	}
+//
+//	public long getLiquidCash() {
+//		return liquidCash;
+//	}
+//
+//	public void setLiquidCash(long liquidCash) {
+//		this.liquidCash = liquidCash;
+//	}
 
 	public Date getDate() {
 		return date;

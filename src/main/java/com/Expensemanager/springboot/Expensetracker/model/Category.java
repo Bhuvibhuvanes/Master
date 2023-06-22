@@ -11,16 +11,16 @@ public class Category {
 	@Id
 	private int category_id;
 	private String name;
-	 @OneToOne(cascade = CascadeType.ALL)
-	private Transaction transaction;
+//	 @OneToOne(cascade = CascadeType.ALL)
+//	private Transaction transaction;
 
-	public Transaction getTransaction() {
-		return transaction;
-	}
-
-	public void setTransaction(Transaction transaction) {
-		this.transaction = transaction;
-	}
+//	public Transaction getTransaction() {
+//		return transaction;
+//	}
+//
+//	public void setTransaction(Transaction transaction) {
+//		this.transaction = transaction;
+//	}
 
 	public int getCategory_id() {
 		return category_id;
@@ -42,7 +42,7 @@ public class Category {
 		super();
 		this.category_id = category_id;
 		this.name = name;
-		this.transaction = transaction;
+//		this.transaction = transaction;
 	}
 
 	public Category() {

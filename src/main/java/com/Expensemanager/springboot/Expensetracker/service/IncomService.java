@@ -35,10 +35,10 @@ public class IncomService {
 		}
 	}
 	public Income createOrUpdateIncome(Income income) {
-		Optional <Income> incomes=incomeRepository.findById(income.getIncome_id());
+		Optional<Income> incomes=incomeRepository.findById(income.getIncome_id());
 		if(incomes.isPresent()) {
 		Income newIncome=incomes.get();
-		newIncome.getSourceid();
+	
 		newIncome.getAmount();
 		newIncome.getDate();
 		newIncome.getDescription();
@@ -46,7 +46,7 @@ public class IncomService {
 		incomeRepository.save(newIncome);
 		return income;
 		}else {
-			throw new ExpenseManagerNotFoundException("No record Exist");
+			return incomeRepository.save(income);
 
 		}
 		
@@ -58,7 +58,7 @@ public class IncomService {
 			newincome.getAmount();
 			newincome.getDate();
 			newincome.getDescription();
-			newincome.getSourceid();
+			
 			incomeRepository.save(newincome);
 			return newincome;
 		}else {

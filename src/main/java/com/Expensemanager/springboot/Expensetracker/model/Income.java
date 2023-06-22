@@ -10,19 +10,18 @@ public class Income {
 	@Id
 	private int income_id;
 	private Date date;
-	private String sourceid;
 	private long amount;
 	private String description;
 	 @OneToOne(mappedBy = "income")
 	    private Transaction transaction;
 	
-	public Transaction getTransaction() {
-		return transaction;
-	}
-
-	public void setTransaction(Transaction transaction) {
-		this.transaction = transaction;
-	}
+//	public Transaction getTransaction() {
+//		return transaction;
+//	}
+//
+//	public void setTransaction(Transaction transaction) {
+//		this.transaction = transaction;
+//	}
 
 	
 
@@ -34,13 +33,13 @@ public class Income {
 		this.date = date;
 	}
 
-	public String getSourceid() {
-		return sourceid;
-	}
-
-	public void setSource(String sourceid) {
-		this.sourceid = sourceid;
-	}
+//	public String getSourceid() {
+//		return sourceid;
+//	}
+//
+//	public void setSource(String sourceid) {
+//		this.sourceid = sourceid;
+//	}
 
 	public long getAmount() {
 		return amount;
@@ -66,14 +65,14 @@ public class Income {
 		this.income_id = income_id;
 	}
 
-	public Income(int income_id, Date date, String sourceid, long amount, String description, Transaction transaction) {
+	public Income(int income_id, Date date, long amount, String description) {
 		super();
 		this.income_id = income_id;
 		this.date = date;
-		this.sourceid = sourceid;
+//		this.sourceid = sourceid;
 		this.amount = amount;
 		this.description = description;
-		this.transaction = transaction;
+//		this.transaction = transaction;
 	}
 
 	public Income() {
