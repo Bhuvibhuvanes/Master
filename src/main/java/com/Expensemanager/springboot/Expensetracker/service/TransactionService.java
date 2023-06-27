@@ -41,8 +41,10 @@ public class TransactionService {
 			Transaction newTransaction=transactions.get();
 			newTransaction.getAmount();
 			newTransaction.getDate();
+			newTransaction.getCasHand();
+			newTransaction.getLiquidAmount();
 			newTransaction.getDescription();
-			newTransaction.getTransaction_id();
+			newTransaction.getTransactionid();
 			newTransaction=transactionRepository.save(newTransaction);
 			return newTransaction;
 		}else {
@@ -50,12 +52,14 @@ public class TransactionService {
 		}
 	}
 	public Transaction createOrUpdateTransaction(Transaction transaction) {
-		Optional<Transaction> transactions=transactionRepository.findById(transaction.getTransaction_id());
+		Optional<Transaction> transactions=transactionRepository.findById(transaction.getTransactionid());
 		if(transactions.isPresent()) {
 			Transaction newTransaction=transactions.get();
-			newTransaction.getTransaction_id();
+			newTransaction.getTransactionid();
 			newTransaction.getAmount();
 			newTransaction.getDate();
+			newTransaction.getCasHand();
+			newTransaction.getLiquidAmount();
 			newTransaction.getDescription();
 			newTransaction=transactionRepository.save(newTransaction);
 			return newTransaction;

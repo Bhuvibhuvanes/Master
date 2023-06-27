@@ -17,15 +17,17 @@ public class Transaction {
 	@JoinColumn(name = "category_id")
 	private Category category;
 	private long Amount;
+	private long casHand;
+	private long liquidAmount;
+	
 	private String description;
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "income_id")
 	private Income income;
-//	private long cash;
-//	private long liquidCash;
+
 
 	public Transaction(int transactionid, Date date, Category category, long amount, String description, Income income,
-			long cash, long liquidCash) {
+			long casHand, long liquidAmount) {
 		super();
 		this.transactionid = transactionid;
 		this.date = date;
@@ -33,8 +35,8 @@ public class Transaction {
 		Amount = amount;
 		this.description = description;
 		this.income = income;
-//		this.cash = cash;
-//		this.liquidCash = liquidCash;
+		this.casHand = casHand;
+		this.liquidAmount = liquidAmount;
 	}	
 
 	
@@ -71,21 +73,6 @@ public class Transaction {
 		this.transactionid = transactionid;
 	}
 
-//	public long getCash() {
-//		return cash;
-//	}
-//
-//	public void setCash(long cash) {
-//		this.cash = cash;
-//	}
-//
-//	public long getLiquidCash() {
-//		return liquidCash;
-//	}
-//
-//	public void setLiquidCash(long liquidCash) {
-//		this.liquidCash = liquidCash;
-//	}
 
 	public Date getDate() {
 		return date;
@@ -110,5 +97,24 @@ public class Transaction {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	public long getCasHand() {
+		return casHand;
+	}
+
+
+	public void setCasHand(long casHand) {
+		this.casHand = casHand;
+	}
+
+
+	public long getLiquidAmount() {
+		return liquidAmount;
+	}
+
+
+	public void setLiquidAmount(long liquidAmount) {
+		this.liquidAmount = liquidAmount;
+	}
+
 
 }
