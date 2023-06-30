@@ -18,57 +18,50 @@ public class CategoryService {
 	CategoryRepository categoryRepository;
 
 	public List<Category> getCategory() {
-
-		List<Category> category = categoryRepository.findAll();
-		if (category.size() > 0) {
-			return category;
+		List<Category> cat = categoryRepository.findAll();
+		if (cat.size() > 0) {
+			return cat;
 		} else {
 			return new ArrayList<Category>();
 		}
 	}
-
 	public Category getCategoryId(int id) {
-		Optional<Category> category = categoryRepository.findById(id);
-		if (category.isPresent()) {
-			return category.get();
-		} else {
-			throw new ExpenseManagerNotFoundException("No record Exist");
-		}
-	}
-
-	public Category updateCategory(Category category, int id) {
-		Optional<Category> categorys = categoryRepository.findById(id);
-		if (categorys.isPresent()) {
-			Category newCategory = new Category();
-			newCategory.getName();
-			return newCategory;
+		Optional<Category> cat = categoryRepository.findById(id);
+		if (cat.isPresent()) {
+			return cat.get();
 		} else {
 			throw new ExpenseManagerNotFoundException("No record Exist");
 		}
 	}
 	public Category createOrUpdateCategory(Category category) {
-		Optional<Category> categorys=categoryRepository.findById(category.getCategory_id());
-		if(categorys.isPresent()) {
-		Category newCategory=new Category();
-		newCategory.getName();
-		newCategory.getCategory_id();
-		return newCategory;
-		}
-		else {
-			category=categoryRepository.save(category);
+		Optional<Category> cats = categoryRepository.findById(category.getId());
+		if (cats.isPresent()) {
+			Category newCat = new Category();
+			newCat.getCategorys();
+			newCat.getId();
+			categoryRepository.save(newCat);
 			return category;
+		} else {
+			return categoryRepository.save(category);	
 		}
 	}
-	
-	public void  deleteCategory(int id) {
-		Optional<Category> category=categoryRepository.findById(id);
-		if(category.isPresent()) {
-			categoryRepository.deleteById(id);
-			
-		}else {
+	public Category updateCategory(Category category, int id) {
+		Optional<Category> cats = categoryRepository.findById(id);
+		if (cats.isPresent()) {
+			Category newCat = new Category();
+			newCat.getCategorys();
+			categoryRepository.save(newCat);
+			return category;
+		} else {
 			throw new ExpenseManagerNotFoundException("No record Exist");
 		}
 	}
-
-	
+	public void deleteCategory(int id) {
+		Optional<Category> category = categoryRepository.findById(id);
+		if (category.isPresent()) {
+			categoryRepository.deleteById(id);
+		} else {
+			throw new ExpenseManagerNotFoundException("No record Exist");
+		}
+	}
 }

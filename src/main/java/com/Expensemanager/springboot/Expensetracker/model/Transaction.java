@@ -11,110 +11,65 @@ import jakarta.persistence.OneToOne;
 @Entity
 public class Transaction {
 	@Id
-	private int transactionid;
-	private Date date;
+	private int id;
+	private String Description;
+	private double amount;
+	private String transaction;
 	@OneToOne
-	@JoinColumn(name = "category_id")
+	@JoinColumn(name = "categorys")
 	private Category category;
-	private long Amount;
-	private long casHand;
-	private long liquidAmount;
-	
-	private String description;
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "income_id")
-	private Income income;
+	@OneToOne
+	@JoinColumn(name = "mode")
+	private PaymentMode paymentMode;
 
-
-	public Transaction(int transactionid, Date date, Category category, long amount, String description, Income income,
-			long casHand, long liquidAmount) {
-		super();
-		this.transactionid = transactionid;
-		this.date = date;
-		this.category = category;
-		Amount = amount;
-		this.description = description;
-		this.income = income;
-		this.casHand = casHand;
-		this.liquidAmount = liquidAmount;
-	}	
-
-	
 	public Transaction() {
 		super();
 	}
-
+	public Transaction(int id, String description, double amount, String transaction, Category category,
+			PaymentMode paymentMode) {
+		super();
+		this.id = id;
+		Description = description;
+		this.amount = amount;
+		this.transaction = transaction;
+		this.category = category;
+		this.paymentMode = paymentMode;
+	}
+	
+	public String getDescription() {
+		return Description;
+	}
+	public void setDescription(String description) {
+		Description = description;
+	}
+	public double getAmount() {
+		return amount;
+	}
+	public void setAmount(double amount) {
+		this.amount = amount;
+	}
+	public String getTransaction() {
+		return transaction;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public Category getCategory() {
 		return category;
 	}
-
 	public void setCategory(Category category) {
 		this.category = category;
 	}
-
-	
-
-	
-	public Income getIncome() {
-		return income;
+	public PaymentMode getPaymentMode() {
+		return paymentMode;
 	}
-
-	public void setIncome(Income income) {
-		this.income = income;
+	public void setPaymentMode(PaymentMode paymentMode) {
+		this.paymentMode = paymentMode;
 	}
-
-	
-
-	public int getTransactionid() {
-		return transactionid;
+	public void setTransaction(String transaction) {
+		this.transaction = transaction;
 	}
-
-	public void setTransactionid(int transactionid) {
-		this.transactionid = transactionid;
-	}
-
-
-	public Date getDate() {
-		return date;
-	}
-
-	public void setDate(Date date) {
-		this.date = date;
-	}
-
-	public long getAmount() {
-		return Amount;
-	}
-
-	public void setAmount(long amount) {
-		Amount = amount;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-	public long getCasHand() {
-		return casHand;
-	}
-
-
-	public void setCasHand(long casHand) {
-		this.casHand = casHand;
-	}
-
-
-	public long getLiquidAmount() {
-		return liquidAmount;
-	}
-
-
-	public void setLiquidAmount(long liquidAmount) {
-		this.liquidAmount = liquidAmount;
-	}
-
-
 }

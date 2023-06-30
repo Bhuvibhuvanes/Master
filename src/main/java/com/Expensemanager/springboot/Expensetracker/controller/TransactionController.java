@@ -23,36 +23,38 @@ import com.Expensemanager.springboot.Expensetracker.service.TransactionService;
 @ControllerAdvice
 @RequestMapping("/transactions")
 public class TransactionController extends ResponseEntityExceptionHandler {
-	@Autowired
-	TransactionService transactionService;
+	 @Autowired
+	    TransactionService transactionService;
 
-	@GetMapping
-	public ResponseEntity<List<Transaction>> getTransaction() {
-		List<Transaction> list = transactionService.getTransaction();
-		return new ResponseEntity<List<Transaction>>(list, HttpStatus.OK);
-	}
+	    @GetMapping
+	    public ResponseEntity<List<Transaction>> getTransactions() {
+	        List<Transaction> transactions = transactionService.getTransactions();
+	        return new ResponseEntity<>(transactions, HttpStatus.OK);
+	    }
 
-	@GetMapping("/{id}")
-	public ResponseEntity<Transaction> getTransactionId(@PathVariable("id") int id) {
-		Transaction entity = transactionService.getTransactionId(id);
-		return new ResponseEntity<Transaction>(entity, HttpStatus.OK);
-	}
+	    @GetMapping("/{id}")
+	    public ResponseEntity<Transaction> getTransactionById(@PathVariable("id") int id) {
+	        Transaction transaction = transactionService.getTransactionById(id);
+	        return new ResponseEntity<>(transaction, HttpStatus.OK);
+	    }
 
-	@PostMapping
-	public ResponseEntity<Transaction> createOrUpdatetransaction(@RequestBody Transaction transaction) {
-		Transaction update = transactionService.createOrUpdateTransaction(transaction);
-		return new ResponseEntity<Transaction>(update, HttpStatus.CREATED);
-	}
+	    @PostMapping
+	    public ResponseEntity<Transaction> createOrUpdateTransaction(@RequestBody Transaction transaction) {
+	        Transaction savedTransaction = transactionService.createOrUpdateTransaction(transaction);
+	        return new ResponseEntity<>(savedTransaction, HttpStatus.CREATED);
+	    }
 
-	@PutMapping("/{id}")
-	public ResponseEntity<Transaction> updatetransactiont(@RequestBody Transaction transaction, @PathVariable int id) {
-		Transaction entity = transactionService.updateTransaction(transaction, id);
-		return new ResponseEntity<Transaction>(entity, HttpStatus.CREATED);
-	}
+	    @PutMapping("/{id}")
+	    public ResponseEntity<Transaction> updateTransaction(@RequestBody Transaction transaction,
+	                                                         @PathVariable("id") int id) {
+	        transaction.setId(id);
+	        Transaction updatedTransaction = transactionService.createOrUpdateTransaction(transaction);
+	        return new ResponseEntity<>(updatedTransaction, HttpStatus.OK);
+	    }
 
-	@DeleteMapping("/{id}")
-	public HttpStatus deletetransaction(@PathVariable("id") int id) {
-		transactionService.deleteTransaction(id);
-		return HttpStatus.OK;
-	}
+	    @DeleteMapping("/{id}")
+	    public ResponseEntity<Void> deleteTransaction(@PathVariable("id") int id) {
+	        transactionService.deleteTransaction(id);
+	        return new ResponseEntity<>(HttpStatus.OK);
+	    }
 }

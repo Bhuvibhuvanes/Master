@@ -23,37 +23,37 @@ import com.Expensemanager.springboot.Expensetracker.service.CategoryService;
 @ControllerAdvice
 @RequestMapping("/categorys")
 public class CategoryController  extends ResponseEntityExceptionHandler {
-	@Autowired
-	CategoryService categoryservice;
-	@GetMapping
-	public ResponseEntity <List<Category>>getCategory(){
-		List<Category>list = categoryservice.getCategory();
-    	return new ResponseEntity<List<Category>>(list,HttpStatus.OK);
-	}
-	@GetMapping("/{id}")
-	public ResponseEntity<Category>getCategoryId(@PathVariable("id")int id){
-		Category entity=categoryservice.getCategoryId(id);
+	 @Autowired
+	    CategoryService categoryService;
 
-		return new ResponseEntity<Category>(entity,HttpStatus.OK);	
-	}
-	
-	@PostMapping
-	public ResponseEntity<Category>createOrUpdateCategory(@RequestBody Category category){
+	    @GetMapping
+	    public ResponseEntity<List<Category>> getCategory() {
+	        List<Category> categories = categoryService.getCategory();
+	        return new ResponseEntity<>(categories, HttpStatus.OK);
+	    }
 
-		Category update=categoryservice.createOrUpdateCategory(category);
-return new ResponseEntity<Category>(update,HttpStatus.CREATED);		
-	}
-	@PutMapping("/{id}")
-	public ResponseEntity<Category>updateCategroy(@RequestBody Category category,@PathVariable int id)
-	{
+	    @GetMapping("/{id}")
+	    public ResponseEntity<Category> getCategoryById(@PathVariable("id") int id) {
+	        Category category = categoryService.getCategoryId(id);
+	        return new ResponseEntity<>(category, HttpStatus.OK);
+	    }
 
-		Category entity=categoryservice.updateCategory(category,id);
-return new ResponseEntity<Category>(HttpStatus.CREATED);
-	}
-	@DeleteMapping("/{id}")
-	public HttpStatus deleteCategory(@PathVariable("id")int id) {
-		categoryservice.deleteCategory(id);
+	    @PostMapping
+	    public ResponseEntity<Category> createOrUpdateCategory(@RequestBody Category category) {
+	        Category updatedCategory = categoryService.createOrUpdateCategory(category);
+	        return new ResponseEntity<>(updatedCategory, HttpStatus.CREATED);
+	    }
 
-		return HttpStatus.OK;
-	}
+	    @PutMapping("/{id}")
+	    public ResponseEntity<Category> updateCategory(@RequestBody Category category, @PathVariable("id") int id) {
+	        category.setId(id);
+	        Category updatedCategory = categoryService.createOrUpdateCategory(category);
+	        return new ResponseEntity<>(updatedCategory, HttpStatus.OK);
+	    }
+
+	    @DeleteMapping("/{id}")
+	    public ResponseEntity<Void> deleteCategory(@PathVariable("id") int id) {
+	        categoryService.deleteCategory(id);
+	        return new ResponseEntity<>(HttpStatus.OK);
+	    }
 }

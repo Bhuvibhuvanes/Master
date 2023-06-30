@@ -9,44 +9,30 @@ import jakarta.persistence.OneToOne;
 @Entity
 public class Category {
 	@Id
-	private int category_id;
-	private String name;
-//	 @OneToOne(cascade = CascadeType.ALL)
-//	private Transaction transaction;
-
-//	public Transaction getTransaction() {
-//		return transaction;
-//	}
-//
-//	public void setTransaction(Transaction transaction) {
-//		this.transaction = transaction;
-//	}
-
-	public int getCategory_id() {
-		return category_id;
-	}
-
-	public void setCategory_id(int category_id) {
-		this.category_id = category_id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public Category(int category_id, String name, Transaction transaction) {
+//	@OneToOne(cascade = CascadeType.ALL)
+	private int id;
+	
+	private String categorys;
+	
+	public Category(int id, String categorys) {
 		super();
-		this.category_id = category_id;
-		this.name = name;
-//		this.transaction = transaction;
+		this.id = id;
+		this.categorys = categorys;
 	}
-
 	public Category() {
 		super();
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getCategorys() {
+		return categorys;
+	}
+	public void setCategorys(String categorys) {
+		this.categorys = categorys;
 	}
 
 }
